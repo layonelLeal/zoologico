@@ -108,7 +108,11 @@ public class VentanaPricipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void verAnimalesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verAnimalesActionPerformed
-        
+        VentanaViewAnimals VentViewAni = new VentanaViewAnimals();
+       
+        VentViewAni.setLocationRelativeTo(null);
+        VentViewAni.setVisible(true);
+        this.setVisible(false);
         System.out.println("Viendo Animales...");
     }//GEN-LAST:event_verAnimalesActionPerformed
 
