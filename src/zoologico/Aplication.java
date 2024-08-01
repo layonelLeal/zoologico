@@ -6,6 +6,8 @@
  */
 package zoologico;
 
+import zoologico.view.VentanaPricipal;
+
 /**
  *
  * @author Lenovo
@@ -14,7 +16,10 @@ public class Aplication {
 
   
     public static void main(String[] args) {
+         VentanaPricipal principal = new VentanaPricipal();
          
+         principal.setVisible(true);
+         principal.setLocationRelativeTo(null);
     }
     
 }
