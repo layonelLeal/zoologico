@@ -6,6 +6,8 @@ package zoologico.view;
 
 import java.awt.Color;
 import java.awt.Cursor;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -24,6 +26,7 @@ public class VerAnimales extends javax.swing.JPanel {
     /**
      * Creates new form VerAnimales
      */
+    VentanaViewAnimals vva;
     DefaultTableModel tm = new DefaultTableModel(){
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -31,8 +34,16 @@ public class VerAnimales extends javax.swing.JPanel {
             }            
         };;
     
+    public void changeVentana(){
+        vva.setVisible(false);
+        VentanaPricipal vp = new VentanaPricipal();
+        vp.setLocationRelativeTo(null);
+        vp.setVisible(true);
+    }
     
-    public VerAnimales() {
+    
+    public VerAnimales(VentanaViewAnimals vva) {
+        this.vva = vva;
         initComponents();
         String ids[] = new String[]{"Nombre", "Alimentado", "Habitat", "Altura", "Ancho", "Largo"};
         tm.setColumnIdentifiers(ids);
@@ -49,16 +60,29 @@ public class VerAnimales extends javax.swing.JPanel {
                     btnAlimentar.setVisible(true);
                     contentButton.add(btnAlimentar);
                     contentButton.setVisible(true);
-                    contentButton.repaint();
-                    // Aquí puedes realizar acciones con la fila seleccionada
+                    contentButton.repaint();                    
                 }
             }
         });
         addDemoValue();
+        
+        AnimalsTable.addKeyListener(new KeyAdapter(){
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == 8){
+                    System.out.println("Regresando...");
+                    changeVentana();
+                }
+                System.out.println("Tecla presionada: " + e.getKeyCode());
+            }
+        });
     }
     
     public void addDemoValue (){
         tm.addRow(new Object[]{"León", "Sí", "Pradera", 10, 10, 30, });
+        tm.addRow(new Object[]{"Gato", "No", "Casa", 10, 10, 30, });
+        tm.addRow(new Object[]{"Perro", "Sí", "Casa", 10, 10, 30, });
+        tm.addRow(new Object[]{"Tigre", "Sí", "Pradera", 10, 10, 30, });
     }
 
     /**

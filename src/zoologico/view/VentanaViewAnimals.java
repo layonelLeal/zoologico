@@ -15,7 +15,7 @@ public class VentanaViewAnimals extends javax.swing.JFrame {
      */
     public VentanaViewAnimals() {
         initComponents();
-        VerAnimales viewAnimals = new VerAnimales();
+        VerAnimales viewAnimals = new VerAnimales(this);
         viewAnimals.setSize(700,400);
         viewAnimals.setLocation(0,0);
         content.removeAll();
