@@ -4,8 +4,15 @@
  */
 package zoologico.view;
 
+import java.awt.Color;
+import java.awt.Cursor;
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.SwingConstants;
+import javax.swing.border.Border;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -17,20 +24,41 @@ public class VerAnimales extends javax.swing.JPanel {
     /**
      * Creates new form VerAnimales
      */
-    DefaultTableModel tm = new DefaultTableModel();
+    DefaultTableModel tm = new DefaultTableModel(){
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false; // Todas las celdas no son editables
+            }            
+        };;
+    
+    
     public VerAnimales() {
         initComponents();
-        String ids[] = new String[]{"Nombre", "Alimentado", "Habitat", "Altura", "Ancho", "Largo", "Alimentar"};
+        String ids[] = new String[]{"Nombre", "Alimentado", "Habitat", "Altura", "Ancho", "Largo"};
         tm.setColumnIdentifiers(ids);
         AnimalsTable.setModel(tm);
+        AnimalsTable.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                if (!e.getValueIsAdjusting()) {
+                    Integer seleccionFila = AnimalsTable.getSelectedRow();
+                    System.out.println("La fila numero #"+ seleccionFila.toString() + " fue seleccionada papá");
+                    JButton btnAlimentar = new JButton("Alimentar");
+                    btnAlimentar.setLocation(0, 0);
+                    btnAlimentar.setSize(100, 25);
+                    btnAlimentar.setVisible(true);
+                    contentButton.add(btnAlimentar);
+                    contentButton.setVisible(true);
+                    contentButton.repaint();
+                    // Aquí puedes realizar acciones con la fila seleccionada
+                }
+            }
+        });
         addDemoValue();
     }
     
     public void addDemoValue (){
-        JLabel labelAlimentar = new JLabel("Texto");
-        JButton btnAlimentar = new JButton("Alimentar");
-        labelAlimentar.add(btnAlimentar);
-        tm.addRow(new Object[]{"León", "Sí", "Pradera", 10, 10, 30, labelAlimentar});
+        tm.addRow(new Object[]{"León", "Sí", "Pradera", 10, 10, 30, });
     }
 
     /**
@@ -46,6 +74,7 @@ public class VerAnimales extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         AnimalsTable = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
+        contentButton = new javax.swing.JPanel();
 
         jTextField1.setText("jTextField1");
 
@@ -75,9 +104,18 @@ public class VerAnimales extends javax.swing.JPanel {
         jScrollPane1.setViewportView(AnimalsTable);
         if (AnimalsTable.getColumnModel().getColumnCount() > 0) {
             AnimalsTable.getColumnModel().getColumn(1).setPreferredWidth(60);
-            AnimalsTable.getColumnModel().getColumn(3).setResizable(false);
-            AnimalsTable.getColumnModel().getColumn(4).setResizable(false);
         }
+
+        javax.swing.GroupLayout contentButtonLayout = new javax.swing.GroupLayout(contentButton);
+        contentButton.setLayout(contentButtonLayout);
+        contentButtonLayout.setHorizontalGroup(
+            contentButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 581, Short.MAX_VALUE)
+        );
+        contentButtonLayout.setVerticalGroup(
+            contentButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 49, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -85,10 +123,12 @@ public class VerAnimales extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 587, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(contentButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 587, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -99,13 +139,16 @@ public class VerAnimales extends javax.swing.JPanel {
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                .addComponent(contentButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(51, 51, 51))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable AnimalsTable;
+    private javax.swing.JPanel contentButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField1;

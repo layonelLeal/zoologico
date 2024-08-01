@@ -22,7 +22,6 @@ public class VentanaPricipal extends javax.swing.JFrame {
     public VentanaPricipal() {
         initComponents();
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -32,6 +31,7 @@ public class VentanaPricipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        group = new javax.swing.ButtonGroup();
         jLabel1 = new javax.swing.JLabel();
         verAnimales = new javax.swing.JButton();
         verHabitats = new javax.swing.JButton();
@@ -112,10 +112,12 @@ public class VentanaPricipal extends javax.swing.JFrame {
        
         VentViewAni.setLocationRelativeTo(null);
         VentViewAni.setVisible(true);
+        VentViewAni.setSize(800, 500);
+        VentViewAni.setLocation(0, 0);
         this.setVisible(false);
         System.out.println("Viendo Animales...");
     }//GEN-LAST:event_verAnimalesActionPerformed
-
+    
     private void verHabitatsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verHabitatsActionPerformed
         System.out.println("Viendo Habitats...");
     }//GEN-LAST:event_verHabitatsActionPerformed
@@ -127,10 +129,11 @@ public class VentanaPricipal extends javax.swing.JFrame {
     private void addAnimalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addAnimalActionPerformed
         System.out.println("Añadiendo Animales...");
     }//GEN-LAST:event_addAnimalActionPerformed
-
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addAnimal;
     private javax.swing.JButton crearHabitat;
+    private javax.swing.ButtonGroup group;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JButton verAnimales;
     private javax.swing.JButton verHabitats;
